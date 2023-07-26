@@ -1,16 +1,7 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef _SHELL_H_
+#define _SHELL_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-
-#define MAX_COMMAND_LENGTH 100
-#define MAX_ARGS 10
-
-void executeCommand(char** args);
+void execute_command(char* args[]);
+void parse_input(char* input, char* args[]);
 
 #endif
