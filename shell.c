@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <string.h>
 #include "shell.h"
 
 #define MAX_INPUT_LENGTH 1024
-#define MAX_ARGS 64
 
-void execute_command(char* args[]) {
+void execute_command(char* command) {
     pid_t pid = fork();
 
     if (pid < 0) {
@@ -16,7 +15,8 @@ void execute_command(char* args[]) {
         exit(EXIT_FAILURE);
     } else if (pid == 0) {
         // Child process
-        if (execvp(args[0], args) == -1) {
+        char* args[] = {command, NULL};
+        if (execvp(command, args) == -1) {
             perror("execvp");
             exit(EXIT_FAILURE);
         }
@@ -27,21 +27,8 @@ void execute_command(char* args[]) {
     }
 }
 
-void parse_input(char* input, char* args[]) {
-    char* token;
-    int arg_count = 0;
-
-    token = strtok(input, " \t\n");
-    while (token != NULL && arg_count < MAX_ARGS) {
-        args[arg_count++] = token;
-        token = strtok(NULL, " \t\n");
-    }
-    args[arg_count] = NULL; // Set the last element to NULL to indicate the end of args array
-}
-
 int main() {
     char input[MAX_INPUT_LENGTH];
-    char* args[MAX_ARGS];
 
     while (1) {
         printf("Shell > ");
@@ -57,16 +44,12 @@ int main() {
             input[strlen(input) - 1] = '\0';
         }
 
-        parse_input(input, args);
-
-        if (args[0] != NULL) {
-            if (strcmp(args[0], "exit") == 0) {
-                // Exit the shell
-                break;
-            }
-
-            execute_command(args);
+        if (strcmp(input, "exit") == 0) {
+            // Exit the shell
+            break;
         }
+
+        execute_command(input);
     }
 
     return 0;
