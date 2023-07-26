@@ -37,7 +37,7 @@ char **tokenize(char *line)
             tokens = realloc(tokens, capacity * sizeof(char*));
             if (!tokens)
             {
-                perror("kash");
+                perror("err");
                 exit(1);
             }
         }

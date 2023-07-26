@@ -13,12 +13,12 @@ int main(void)
         char prompt[] = "$ ";
         write(1, prompt, sizeof(prompt) - 1);
 
-        char *line = readLine();
-        char **tokens = splitLine(line);
+        char *line = _getline();
+        char **tokens = tokenize(line);
 
         if (tokens[0] != NULL)
         {
-            exec(tokens);
+            _exec(tokens);
         }
 
         free(tokens);

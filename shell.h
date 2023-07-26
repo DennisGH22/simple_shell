@@ -12,7 +12,7 @@
 
 void _exit(char **args);
 void _exec(char **args);
-int builtins();
+int _builtins();
 void _cd(char **args);
 char** tokenize(char *line);
 char *_getline();
@@ -25,9 +25,9 @@ struct builtin {
 
 // Array of struct builtins representing the list of available built-in commands.
 struct builtin builtins[] = {
-    {"help", help},
-    {"exit", exit},
-    {"cd", cd},
+    //{"help", help},
+    {"exit", _exit},
+    {"cd", _cd},
 };
 
 #endif

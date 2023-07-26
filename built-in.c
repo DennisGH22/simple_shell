@@ -7,7 +7,7 @@
  * Return: The number of built-in commands as an integer.
 */
 
-int builtins()
+int _builtins()
 {
     return sizeof(builtins) / sizeof(struct builtin);
 }

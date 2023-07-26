@@ -10,7 +10,7 @@
 void _exec(char **args)
 {
     // Check if the command is a built-in and execute it if it is.
-    for (int i = 0; i < builtins(); i++)
+    for (int i = 0; i < _builtins(); i++)
     {
         if (strcmp(args[0], builtins[i].name) == 0)
         {
