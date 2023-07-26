@@ -1,42 +1,43 @@
-#include "shell.h"
-
 /**
- * exec_command - Execute a command and wait for the child process
- * @arguments: Array of arguments (including the command) to be executed
- * Return: Exit status of the child process
+ * exec - Executes the given command with the provided arguments.
+ *
+ * @args: An array of strings containing the command and its arguments.
 */
 
-int exec_command(char **arguments)
+void _exec(char **args)
 {
-    pid_t pid;
-    int exe_stat, status;
-
-    pid = fork(); // Create a new child process
-
-    if (pid == -1) // Fork failed
+    // Check if the command is a built-in and execute it if it is.
+    for (int i = 0; i < builtins(); i++)
     {
-        perror("fork");
-        exit(EXIT_FAILURE);
-    }
-    else if (pid == 0) // Child process
-    {
-        execvp(arguments[0], arguments); // Execute the command
-        perror("execvp"); // If execvp returns, an error occurred
-        exit(EXIT_FAILURE);
-    }
-    else // Parent process
-    {
-        if (waitpid(pid, &status, 0) == -1) // Wait for the child to finish
+        if (strcmp(args[0], builtins[i].name) == 0)
         {
-            perror("waitpid");
-            exit(EXIT_FAILURE);
+            builtins[i].func(args);
+            return;
         }
+    }
 
-        if (WIFEXITED(status)) // Check if the child process terminated normally
-            exe_stat = WEXITSTATUS(status); // Get the exit status of the child process
-        else
-            exe_stat = -1; // Something went wrong, set a non-standard error code
+    // If the command is not a built-in, fork a new process and execute the command.
+    pid_t child_pid = fork();
 
-        return (exe_stat);
+    if (child_pid == 0)
+    {
+        // Child process: Execute the command.
+        execvp(args[0], args);
+        perror("err"); // Print an error if execvp fails.
+        exit(1); // Terminate the child process with an error status.
+    }
+    else if (child_pid > 0)
+    {
+        // Parent process: Wait for the child process to complete.
+        int status;
+        do
+        {
+            waitpid(child_pid, &status, WUNTRACED);
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
+    else
+    {
+        // Fork failed, print an error.
+        perror("err");
     }
 }
