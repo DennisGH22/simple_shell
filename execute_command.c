@@ -1,8 +1,11 @@
+#include "shell.h"
+
 /**
  * exec - Executes the given command with the provided arguments.
  *
  * @args: An array of strings containing the command and its arguments.
 */
+
 
 void _exec(char **args)
 {
