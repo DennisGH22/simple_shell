@@ -1,62 +1,71 @@
-#include "shell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
-void executeCommand(char** args)
-{
+#define MAX_INPUT_LENGTH 1024
+#define MAX_ARGS 64
+
+void execute_command(char* args[]) {
     pid_t pid = fork();
 
-    if (pid < 0)
-	{
-        // Error occurred
+    if (pid < 0) {
         perror("fork");
         exit(EXIT_FAILURE);
-    }
-	else if (pid == 0)
-	{
+    } else if (pid == 0) {
         // Child process
-        if (execvp(args[0], args) == -1)
-		{
-            perror("execvp");
-            exit(EXIT_FAILURE);
-        }
-    }
-	else
-	{
+        execvp(args[0], args);
+        perror("execvp");
+        exit(EXIT_FAILURE);
+    } else {
         // Parent process
-        wait(NULL);
+        int status;
+        waitpid(pid, &status, 0);
     }
 }
 
-int main()
-{
-    char command[MAX_COMMAND_LENGTH];
-    char* args[MAX_ARGS];
+void parse_input(char* input, char* args[]) {
     char* token;
+    int arg_count = 0;
 
-    while (1)
-	{
+    token = strtok(input, " \t\n");
+    while (token != NULL && arg_count < MAX_ARGS) {
+        args[arg_count++] = token;
+        token = strtok(NULL, " \t\n");
+    }
+    args[arg_count] = NULL; // Set the last element to NULL to indicate the end of args array
+}
+
+int main() {
+    char input[MAX_INPUT_LENGTH];
+    char* args[MAX_ARGS];
+
+    while (1) {
         printf("Shell > ");
-        fgets(command, MAX_COMMAND_LENGTH, stdin);
-        command[strcspn(command, "\n")] = '\0';
+        fflush(stdout);
 
-        int argCount = 0;
-        token = strtok(command, " ");
-        while (token != NULL && argCount < MAX_ARGS - 1)
-		{
-            args[argCount] = token;
-            argCount++;
-            token = strtok(NULL, " ");
-        }
-        args[argCount] = NULL;
-
-        if (strcmp(args[0], "exit") == 0)
-		{
+        if (fgets(input, MAX_INPUT_LENGTH, stdin) == NULL) {
+            // End of input (e.g., CTRL+D pressed)
             break;
         }
-		else
-		{
-            executeCommand(args);
+
+        // Remove newline character at the end
+        if (input[strlen(input) - 1] == '\n') {
+            input[strlen(input) - 1] = '\0';
+        }
+
+        parse_input(input, args);
+
+        if (args[0] != NULL) {
+            if (strcmp(args[0], "exit") == 0) {
+                // Exit the shell
+                break;
+            }
+
+            execute_command(args);
         }
     }
 
-    return (0);
+    return 0;
 }
