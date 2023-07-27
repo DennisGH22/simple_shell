@@ -9,8 +9,7 @@
 
 int execute_command(char **args)
 {
-	pid_t id;
-	int status;
+	int id, status;
 
 	id = fork();
 
