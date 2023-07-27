@@ -1,9 +1,10 @@
 #include "main.h"
 
 /**
- * main - open shell, project base
- * Return: int
- */
+ * main - Simple shell main function.
+ *
+ * Return: Exit status.
+*/
 
 int main(void)
 {
@@ -31,7 +32,7 @@ int main(void)
 			continue;
 		}
 
-		if (empty_line(buff) == 1)
+		if (empty_line(buff))
 		{
 			exit_status = 0;
 			continue;
@@ -44,7 +45,9 @@ int main(void)
 			exit_status = execute(args);
 		else
 			perror("Error");
-		free_args(args);
+
+		free(args);
 	}
+
 	return (exit_status);
 }
