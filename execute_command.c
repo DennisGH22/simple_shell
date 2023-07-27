@@ -9,17 +9,18 @@
 
 int execute_command(char **args)
 {
-	pid_t pid;
+	pid_t id;
 	int status;
 
-	pid = fork();
+	id = fork();
 
-	if (pid == 0)
+	if (id == 0)
 	{
 		// Child process
 		if (execve(args[0], args, environ) == -1)
 		{
 			perror("Error");
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
