@@ -19,7 +19,6 @@ int execute_command(char **args)
 		if (execve(args[0], args, environ) == -1)
 		{
 			perror("Error");
-			exit(EXIT_FAILURE);
 		}
 	}
 	else
