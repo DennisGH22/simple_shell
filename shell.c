@@ -32,7 +32,8 @@ int _shell()
 
 		if (execute_command(command) != 0)
 		{
-			write(STDERR_FILENO, "Error executing command: ", strlen("Error executing command: "));
+			write(STDERR_FILENO, "Error executing command: ",
+			strlen("Error executing command: "));
 			write(STDERR_FILENO, command, strlen(command));
 			write(STDERR_FILENO, "\n", 1);
 		}
