@@ -11,6 +11,5 @@
 #define MAX_COMMAND_LENGTH 100
 
 int execute_command(char *command);
-int _shell();
 
 #endif
