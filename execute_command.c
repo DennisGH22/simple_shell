@@ -9,9 +9,7 @@
 
 int execute_command(char **args)
 {
-	int id, status;
-
-	id = fork();
+	int id = fork(), status;
 
 	if (id == 0)
 	{
