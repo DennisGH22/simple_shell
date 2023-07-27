@@ -38,7 +38,7 @@ char **split_string(char *str, char *delimiter)
 	int max_tokens = 100; /* Initial maximum number of tokens */
 
 	/* Allocate memory for the array of pointers to substrings */
-	split_str = (char **)malloc(max_tokens * sizeof(char *));
+	split_str = (char **)_malloc(max_tokens * sizeof(char *));
 	if (!split_str)
 	{
 		return NULL;
@@ -56,7 +56,7 @@ char **split_string(char *str, char *delimiter)
 		if (num_tokens >= max_tokens)
 		{
 			max_tokens *= 2; /* Double the maximum tokens */
-			char **temp = (char **)realloc(split_str, max_tokens * sizeof(char *));
+			char **temp = (char **)_realloc(split_str, max_tokens * sizeof(char *));
 			if (!temp)
 			{
 				/* Free previously allocated memory before returning NULL */
