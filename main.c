@@ -1,42 +1,53 @@
 #include "shell.h"
 
 /**
- * main - Simple shell main function
+ * main - Simple shell main function.
  *
- * Return: Always 0
+ * Return: Exit status.
 */
 
 int main(void)
 {
-	char command[MAX_COMMAND_LENGTH];
+	char *buff = NULL, **args;
+	size_t read_size = 0;
+	ssize_t buff_size = 0;
+	int exit_status = 0;
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "$ ", strlen("$ "));
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
 
-		if (fgets(command, sizeof(command), stdin) == NULL)
+		buff_size = getline(&buff, &read_size, stdin);
+		if (buff_size == -1 || _strcmp("exit\n", buff) == 0)
 		{
-			/* Handle end of file (Ctrl+D) */
-			write(STDOUT_FILENO, "\n", 1);
+			free(buff);
 			break;
 		}
+		buff[buff_size - 1] = '\0';
 
-		/* Remove trailing newline character */
-		command[strcspn(command, "\n")] = '\0';
-
-		if (strlen(command) == 0)
+		if (_strcmp("env", buff) == 0)
 		{
-			/* Empty command, continue to the next iteration */
+			_env();
 			continue;
 		}
 
-		if (execute_command(command) != 0)
+		if (_getline(buff))
 		{
-			write(STDERR_FILENO, "Error executing command: ", strlen("Error executing command: "));
-			write(STDERR_FILENO, command, strlen(command));
-			write(STDERR_FILENO, "\n", 1);
+			exit_status = 0;
+			continue;
 		}
+
+		args = split_string(buff, " ");
+		args[0] = _path(args[0]);
+
+		if (args[0] != NULL)
+			exit_status = execute_command(args);
+		else
+			perror("Error");
+
+		free_args(args);
 	}
 
-	return (0);
+	return (exit_status);
 }

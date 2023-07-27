@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * execute_command - Execute a command using fork and execve
- * @command: The command to execute
+ * execute_command - Execute a command using fork and execve.
+ * @args: An argument to be passed to the command.
  *
- * Return: 0 on success, 1 on failure
+ * Return: The exit status.
 */
 
-int execute_command(char *command)
+int execute(char **args)
 {
 	pid_t pid;
 	int status;
@@ -17,32 +17,29 @@ int execute_command(char *command)
 	if (pid < 0)
 	{
 		perror("Fork failed");
-		return (1);
+		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
 	{
-		/* Child process */
-		char *args[] = {command, NULL};
-		char *env[] = {NULL}; /* Empty environment variables */
-		if (execve(command, args, env) == -1)
+		// Child process
+		if (execve(args[0], args, environ) == -1)
 		{
-			perror("Command execution failed");
-			_exit(EXIT_FAILURE);
+			perror("Error");
+			exit(EXIT_FAILURE);
 		}
-		_exit(EXIT_SUCCESS);
 	}
 	else
 	{
-		/* Parent process */
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+		// Parent process
+		if (waitpid(pid, &status, 0) == -1)
 		{
-			if (waitpid(pid, &status, WUNTRACED) == -1)
-			{
-				perror("Waitpid failed");
-				return (1);
-			}
+			perror("Waitpid failed");
+			exit(EXIT_FAILURE);
 		}
+		
+		if (WIFEXITED(status))
+			status = WEXITSTATUS(status);
 	}
 
-	return (0);
+	return (status);
 }
