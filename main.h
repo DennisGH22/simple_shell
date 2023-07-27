@@ -19,7 +19,7 @@ int _strlen(char *s);
 char *_getenv(char *env_var);
 void *_calloc(unsigned int nmemb, unsigned int size);
 void _env(void);
-int execute(char **args);
+int execute_command(char **args);
 int empty_line(char *buff);
 
 /* GLOBAL VAR*/

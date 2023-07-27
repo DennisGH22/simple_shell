@@ -7,7 +7,7 @@
  * Return: The exit status.
 */
 
-int execute(char **args)
+int execute_command(char **args)
 {
 	pid_t pid;
 	int status;
