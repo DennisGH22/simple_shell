@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * empty_line - checks if a line is empty (contains only spaces).
  * @buff: line
