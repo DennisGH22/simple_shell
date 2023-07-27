@@ -1,10 +1,9 @@
-#include "shell.h"
+#include "main.h"
 
 /**
- * main - Simple shell main function.
- *
- * Return: Exit status.
-*/
+ * main - open shell, project base
+ * Return: int
+ */
 
 int main(void)
 {
@@ -15,8 +14,8 @@ int main(void)
 
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
+		if (isatty(0))
+			printf("hsh$ ");
 
 		buff_size = getline(&buff, &read_size, stdin);
 		if (buff_size == -1 || _strcmp("exit\n", buff) == 0)
@@ -32,22 +31,20 @@ int main(void)
 			continue;
 		}
 
-		if (_getline(buff))
+		if (empty_line(buff) == 1)
 		{
 			exit_status = 0;
 			continue;
 		}
 
-		args = split_string(buff, " ");
-		args[0] = _path(args[0]);
+		args = _split(buff, " ");
+		args[0] = search_path(args[0]);
 
 		if (args[0] != NULL)
-			exit_status = execute_command(args);
+			exit_status = execute(args);
 		else
 			perror("Error");
-
-		free_args(args);
+		free(args);
 	}
-
 	return (exit_status);
 }

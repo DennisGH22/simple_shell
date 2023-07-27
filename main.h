@@ -6,22 +6,23 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <stddef.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-int execute_command(char **args);
-char *_getenv(char *env_var);
-char *_strcat(char *dest, char *src);
+/*PROTOTYPES*/
 int _strcmp(char *s1, char *s2);
-void _env(void);
-char **split_string(char *str, char *delimiter);
 char *_strcpy(char *dest, char *src);
+char *search_path(char *command);
+char **_split(char *str, char *sep);
+char *_strcat(char *dest, char *src);
 int _strlen(char *s);
-void *_malloc(unsigned int nmemb, unsigned int size);
-char *_path(char *command);
-int _getline(char *buff);
+char *_getenv(char *env_var);
+void *_calloc(unsigned int nmemb, unsigned int size);
+void _env(void);
+int execute(char **args);
+int empty_line(char *buff);
 
+/* GLOBAL VAR*/
 extern char **environ;
 
 #endif

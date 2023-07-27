@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * search_path - search file between the path
@@ -6,7 +6,7 @@
  * Return: cmd path
  */
 
-char *_path(char *command)
+char *search_path(char *command)
 {
 	char *path = _getenv("PATH"), *path_cpy;
 	char **path_split;

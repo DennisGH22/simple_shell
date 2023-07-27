@@ -1,20 +1,27 @@
-#include "shell.h"
+#include "main.h"
 
 /**
- * malloc_checked - Allocates memory using malloc.
- * @b: Number of bytes in memory.
- *
- * Return: A pointer to the allocated memory.
-*/
+ * _calloc - function that allocates memory for an array, using malloc
+ * @nmemb: array
+ * @size: size
+ * Return: pointer or NULL
+ */
 
-void *_malloc(unsigned int b)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	void *ptr;
+	unsigned int index = 0;
+	char *ptr = NULL;
 
-	ptr = malloc(b);
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+
+	ptr = malloc(nmemb * size);
 
 	if (ptr == NULL)
-		exit(98);
+		return (NULL);
+
+	for (; index < (nmemb * size); index++)
+		ptr[index] = 0;
 
 	return (ptr);
 }
