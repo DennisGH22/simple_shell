@@ -46,7 +46,7 @@ int main(void)
 		else
 			perror("Error");
 
-		free_args(args);
+		free(args);
 	}
 
 	return (exit_status);
