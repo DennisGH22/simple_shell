@@ -9,19 +9,28 @@
 
 int execute_command(char **args)
 {
-	int id = fork(), status;
+	pid_t pid;
+	int status;
 
-	if (id == 0)
+	pid = fork();
+
+	if (pid < 0)
 	{
-		// Child process
+		perror("Fork failed");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		/* Child process */
 		if (execve(args[0], args, environ) == -1)
 		{
 			perror("Error");
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		// Parent process
+		/* Parent process */
 		wait(&status);
 
 		if (WIFEXITED(status))
