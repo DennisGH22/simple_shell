@@ -21,6 +21,7 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 void _env(void);
 int execute_command(char **args);
 int empty_line(char *buff);
+char *_strdup(char *str);
 
 /* GLOBAL VAR*/
 extern char **environ;
