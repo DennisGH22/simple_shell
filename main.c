@@ -42,7 +42,7 @@ int main(void)
 		args[0] = search_path(args[0]);
 
 		if (args[0] != NULL)
-			exit_status = execute(args);
+			exit_status = execute_command(args);
 		else
 			perror("Error");
 
