@@ -14,12 +14,7 @@ int execute_command(char **args)
 
 	pid = fork();
 
-	if (pid < 0)
-	{
-		perror("Fork failed");
-		exit(EXIT_FAILURE);
-	}
-	else if (pid == 0)
+	if (pid == 0)
 	{
 		// Child process
 		if (execve(args[0], args, environ) == -1)
