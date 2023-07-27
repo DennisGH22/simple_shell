@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * main - Simple shell main function.
- *
- * Return: Exit status.
-*/
+ * main - open shell, project base
+ * Return: int
+ */
 
 int main(void)
 {
@@ -38,16 +37,14 @@ int main(void)
 			continue;
 		}
 
-		args = split(buff, " ");
+		args = _split(buff, " ");
 		args[0] = search_path(args[0]);
 
 		if (args[0] != NULL)
 			exit_status = execute(args);
 		else
 			perror("Error");
-
 		free(args);
 	}
-
 	return (exit_status);
 }
