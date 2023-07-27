@@ -14,7 +14,12 @@ int execute_command(char **args)
 
 	pid = fork();
 
-	if (pid == 0)
+	if (pid < 0)
+	{
+		perror("Fork failed");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
 	{
 		// Child process
 		if (execve(args[0], args, environ) == -1)
@@ -26,12 +31,8 @@ int execute_command(char **args)
 	else
 	{
 		// Parent process
-		if (waitpid(pid, &status, 0) == -1)
-		{
-			perror("Waitpid failed");
-			exit(EXIT_FAILURE);
-		}
-		
+		wait(&status);
+
 		if (WIFEXITED(status))
 			status = WEXITSTATUS(status);
 	}
