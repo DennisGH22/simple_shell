@@ -31,7 +31,11 @@ int execute_command(char **args)
 	else
 	{
 		/* Parent process */
-		wait(&status);
+		if (waitpid(pid, &status, 0) == -1)
+		{
+			perror("Waitpid failed");
+			exit(EXIT_FAILURE);
+		}
 
 		if (WIFEXITED(status))
 			status = WEXITSTATUS(status);
