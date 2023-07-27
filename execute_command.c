@@ -34,7 +34,7 @@ int execute_command(char *command)
 	else
 	{
 		/* Parent process */
-		do
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 		{
 			if (waitpid(pid, &status, WUNTRACED) == -1)
 			{
@@ -42,7 +42,6 @@ int execute_command(char *command)
 				return (1);
 			}
 		}
-		while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 
 	return (0);
