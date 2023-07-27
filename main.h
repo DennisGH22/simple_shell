@@ -12,7 +12,7 @@
 /*PROTOTYPES*/
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
-char *search_path(char *command);
+char *env_path(const char *command);
 char **_split(char *str, char *sep);
 char *_strcat(char *dest, char *src);
 int _strlen(char *s);

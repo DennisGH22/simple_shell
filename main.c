@@ -39,7 +39,7 @@ int main(void)
 		}
 
 		args = _split(buff, " ");
-		args[0] = search_path(args[0]);
+		args[0] = env_path(args[0]);
 
 		if (args[0] != NULL)
 			exit_status = execute_command(args);
