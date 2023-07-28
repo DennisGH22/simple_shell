@@ -20,8 +20,6 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 int _getline(char *line);
 void _env(void);
 int _atoi(char *s);
-void _unsetenv(char **arv);
-void _setenv(char **arv);
 
 extern char **environ;
 
