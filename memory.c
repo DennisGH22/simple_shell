@@ -1,59 +1,28 @@
 #include "main.h"
 
 /**
- * malloc_checked - Allocates memory using malloc.
- * @b: Number of bytes in memory.
+ * _calloc - Allocates memory for an array.
+ * @nmemb: The array.
+ * @size: The array size.
  *
- * Return: A pointer to the allocated memory.
+ * Return: Return pointer if !0 or success, otherwise NULL.
 */
 
-void *_malloc(unsigned int b)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	void *ptr;
-
-	ptr = malloc(b);
-
-	if (ptr == NULL)
-		exit(98);
-
-	return (ptr);
-}
-
-/**
- * _realloc - Reallocates a memory block.
- * @ptr: The previously allocated memory.
- * @old_size: The size, in bytes, of the allocated space for ptr.
- * @new_size: The new size, in bytes of the new memory block.
- *
- * Return: Pointer to the new memory block.
-*/
-
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
-{
-	char *new_ptr, *old_ptr = ptr;
+	char *ptr;
 	unsigned int i;
 
-	if (new_size == 0 && ptr != NULL)
-	{
-		free(ptr);
+	if (nmemb == 0 || size == 0)
 		return (NULL);
-	}
+
+	ptr = malloc(nmemb * size);
 
 	if (ptr == NULL)
-		return (malloc(new_size));
-
-	if (new_size == old_size)
-		return (ptr);
-
-	new_ptr = malloc(new_size);
-
-	if (new_ptr == NULL)
 		return (NULL);
 
-	for (i = 0; i < old_size && i < new_size; i++)
-		new_ptr[i] = old_ptr[i];
+	for (i = 0; i < (nmemb * size); i++)
+		*(ptr + i) = 0;
 
-	free(ptr);
-
-	return (new_ptr);
+	return (ptr);
 }
