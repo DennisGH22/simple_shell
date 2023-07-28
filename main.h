@@ -9,8 +9,6 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-struct stat file_info;
-
 /*PROTOTYPES*/
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);

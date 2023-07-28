@@ -16,6 +16,8 @@ char *env_path(char *command)
 	*path_env = _getenv("PATH");
 	int i, path_len = 0;
 
+    struct stat file_info;
+
 	if (stat(command, &file_info) == 0)
 		return (command);
 
