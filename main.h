@@ -13,8 +13,6 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#define PRINTER(c) (write(STDOUT_FILENO, c, _strlen(c)))
-
 int execute_command(char **args);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
