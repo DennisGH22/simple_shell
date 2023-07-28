@@ -13,12 +13,11 @@
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
 char *env_path(char *command);
-char **split_string(char *str, char *sep);
+char **split_string(char *str, char *delimiter);
 char *_strcat(char *dest, char *src);
 int _strlen(char *s);
 char *_getenv(char *env_var);
-void *_malloc(unsigned int b);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_calloc(unsigned int nmemb, unsigned int size);
 void _env(void);
 int execute_command(char **args);
 int empty_line(char *buff);
