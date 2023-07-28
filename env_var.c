@@ -10,31 +10,26 @@
 
 char *_getenv(char *env_var)
 {
-	if (env_var == NULL || *env_var == '\0')
-		return NULL;
+	int i = 0, j;
+	int match_status;
 
-	char **env_ptr = environ;
-
-	while (*env_ptr)
+	for (; environ[i]; i++)
 	{
-		char *env_name = *env_ptr;
+		match_status = 1;
 
-		/* Compare the environment variable name */
-		while (*env_var && *env_var == *env_name)
+		for (j = 0; environ[i][j] != '='; j++)
 		{
-			env_var++;
-			env_name++;
+			if (environ[i][j] != env_var[j])
+				match_status = 0;
 		}
 
-		/* Check if the environment variable matches */
-		if (*env_var == '\0' && *env_name == '=')
-			return env_name + 1;
-
-		env_ptr++;
+		if (match_status == 1)
+			break;
 	}
 
-	return NULL;
+	return (&environ[i][j + 1]);
 }
+
 
 /**
  * _env - Print all environment variables.
@@ -42,8 +37,10 @@ char *_getenv(char *env_var)
 
 void _env(void)
 {
-	for (char **env = environ; *env != NULL; env++)
+	int i = 0;
+
+	for (; environ[i]; i++)
 	{
-		printf("%s\n", *env);
+		printf("%s\n", environ[i]);
 	}
 }
