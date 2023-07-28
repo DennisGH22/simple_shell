@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * empty_line - checks if a line is empty (contains only spaces).
+ * _getline - checks if a line is empty (contains only spaces).
  * @line: line
  *
  * Return: 0 if the line is not empty, 1 if it is empty.

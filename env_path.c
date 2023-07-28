@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * search_path - Search for the command in the directories
+ * env_path - Search for the command in the directories
  * listed in the PATH environment variable.
  *
  * @command: The command to search for in the PATH.

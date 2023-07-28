@@ -32,7 +32,7 @@ int main(void)
 			continue;
 		}
 
-		if (empty_line(buff))
+		if (_getline(buff))
 		{
 			exit_status = 0;
 			continue;
