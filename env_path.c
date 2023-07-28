@@ -26,7 +26,7 @@ char *env_path(char *command)
 		return (NULL);
 
 	_strcpy(path_copy, path_env);
-	path_dirs = _split(path_copy, ":");
+	path_dirs = split_string(path_copy, ":");
 
 	for (i = 0; path_dirs[i]; i++)
 	{

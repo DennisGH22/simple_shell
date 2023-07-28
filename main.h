@@ -13,7 +13,7 @@
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
 char *env_path(char *command);
-char **_split(char *str, char *sep);
+char **split_string(char *str, char *sep);
 char *_strcat(char *dest, char *src);
 int _strlen(char *s);
 char *_getenv(char *env_var);

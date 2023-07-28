@@ -38,7 +38,7 @@ int main(void)
 			continue;
 		}
 
-		args = _split(buff, " ");
+		args = split_string(buff, " ");
 		args[0] = env_path(args[0]);
 
 		if (args[0] != NULL)
