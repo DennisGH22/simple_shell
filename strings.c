@@ -33,9 +33,11 @@ int _strcmp(char *s1, char *s2)
 
 char **split_string(char *str, char *delimiter)
 {
-	char *token;
-	char **split_str = (char **)_calloc(100, sizeof(char *));
+	char *token, **split_str;
 	int i;
+
+	token = strtok(str, delimiter);
+	split_str = (char **)_calloc(100, sizeof(char *));
 
 	if (!split_str)
 	{
@@ -43,13 +45,10 @@ char **split_string(char *str, char *delimiter)
 		return (NULL);
 	}
 
-	for (i = 0; i < 100; i++)
+	for (; token; i++)
 	{
-		token = strtok(i == 0 ? str : NULL, delimiter);
-		if (token == NULL)
-			break;
-
 		split_str[i] = token;
+		token = strtok(NULL, delimiter);
 	}
 
 	return (split_str);
