@@ -12,7 +12,7 @@
 /*PROTOTYPES*/
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
-char *env_path(const char *command);
+char *env_path(char *command);
 char **_split(char *str, char *sep);
 char *_strcat(char *dest, char *src);
 int _strlen(char *s);
@@ -21,7 +21,6 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 void _env(void);
 int execute_command(char **args);
 int empty_line(char *buff);
-char *_strdup(char *str);
 
 /* GLOBAL VAR*/
 extern char **environ;

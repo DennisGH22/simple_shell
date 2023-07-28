@@ -1,52 +1,55 @@
 #include "main.h"
 
 /**
- * search_path - Search for the command in the directories listed in the PATH environment variable.
+ * search_path - Search for the command in the directories
+ * listed in the PATH environment variable.
+ *
  * @command: The command to search for in the PATH.
+ *
  * Return: The absolute path of the command if found, or NULL if not found.
 */
 
-char *env_path(const char *command)
+char *env_path(char *command)
 {
-	char *path_env = getenv("PATH");
-	if (path_env == NULL || command == NULL || *command == '\0')
-		return (NULL);
+    char *path_copy, **path_dirs, *path_concatenated = NULL,
+	*path_env = _getenv("PATH");
+    int i, path_len = 0;
+    struct stat file_info;
 
-	char *path_env_copy = strdup(path_env);
-	if (path_env_copy == NULL)
-		return (NULL);
+    if (stat(command, &file_info) == 0)
+        return command;
 
-	char *path_dir;
-	char *path_concatenated = NULL;
-	const char *delimiter = ":";
+    path_copy = malloc(_strlen(path_env) + 1);
+    if (path_copy == NULL)
+        return NULL;
 
-	struct stat file_info;
-	char *result_path = NULL;
+    _strcpy(path_copy, path_env);
+    path_dirs = _split(path_copy, ":");
 
-	path_dir = strtok(path_env_copy, delimiter);
-	while (path_dir != NULL)
-	{
-		size_t path_len = strlen(path_dir);
+    for (i = 0; path_dirs[i]; i++)
+    {
+        path_len = _strlen(path_dirs[i]);
 
-		if (path_dir[path_len - 1] != '/')
-			asprintf(&path_concatenated, "%s/%s", path_dir, command);
-		else
-			asprintf(&path_concatenated, "%s%s", path_dir, command);
+        if (path_dirs[i][path_len - 1] != '/')
+            path_concatenated = _strcat(path_dirs[i], "/");
+        else
+            path_concatenated = _strcat(path_dirs[i], command);
 
-		if (path_concatenated == NULL)
-			break;
+        if (path_concatenated == NULL)
+            break;
 
-		if (stat(path_concatenated, &file_info) == 0)
-		{
-			result_path = strdup(path_concatenated);
-			free(path_concatenated);
-			break;
-		}
+        if (stat(path_concatenated, &file_info) == 0)
+            break;
+    }
 
-		free(path_concatenated);
-		path_dir = strtok(NULL, delimiter);
-	}
+    free(path_copy);
 
-	free(path_env_copy);
-	return (result_path);
+    if (!path_dirs[i])
+    {
+        free(path_dirs);
+        return NULL;
+    }
+
+    free(path_dirs);
+    return path_concatenated;
 }
