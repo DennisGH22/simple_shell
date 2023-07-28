@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * empty_line - checks if a line is empty (contains only spaces).

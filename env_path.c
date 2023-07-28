@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * search_path - Search for the command in the directories

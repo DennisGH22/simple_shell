@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * execute_command - Execute a command using fork and execve.
