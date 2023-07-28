@@ -56,63 +56,67 @@ char **split_string(char *str, char *delimiter)
 }
 
 /**
- * _strcpy - function that copies the string pointed to by src
- * @dest: pointer
- * @src: ponter
- * Return: @dest
- */
+ * _strcpy - Copies the string pointed to by src.
+ * @dest: destination.
+ * @src: source.
+ *
+ * Return: dest.
+*/
+
 char *_strcpy(char *dest, char *src)
 {
-	char *c = dest;
+	int i;
 
-	while (*src != '\0')
+	for (i = 0; i >= 0; i++)
 	{
-		*dest = *src;
-		dest++;
-		src++;
+		*(dest + i) = *(src + i);
+
+		if (*(src + i) == '\0')
+		{
+			break;
+		}
 	}
-	*dest = '\0';
-	return (c);
-}
-
-/**
- * _strcat - function that concatenates two strings
- * @dest: string
- * @src: string
- * Return: @dest
- */
-
-char *_strcat(char *dest, char *src)
-{
-	int a, b;
-
-	for (a = 0; dest[a] != '\0'; a += 1)
-	{}
-
-	for (b = 0; src[b] != '\0'; b += 1)
-	{
-		dest[a] = src[b];
-		a++;
-	}
-	dest[a] = '\0';
 	return (dest);
 }
 
 /**
- * _strlen - string length
- * @s: string
- * Return: result
+ * _strlen - Returns the length of a string.
+ * @s: String checked.
  *
- */
+ * Return: String length.
+*/
 
 int _strlen(char *s)
 {
-	int i = 0;
-
-	while (s[i] != '\0')
-		i++;
-
-	return (i);
+	return (strlen(s));
 }
 
+/**
+ * _strcat - Concatenate two strings.
+ * @dest: Destinaion.
+ * @src: Source.
+ *
+ * Return: dest.
+*/
 
+char *_strcat(char *dest, char *src)
+{
+	int i, c;
+
+	for (i = 0; dest[i] != '\0'; i++)
+	{
+		/**
+		 * Do nothing...
+		*/
+	}
+
+	for (c = 0; src[c] != '\0'; c++)
+	{
+		dest[i] = src[c];
+		i++;
+	}
+
+	dest[i] = '\0';
+
+	return (dest);
+}
