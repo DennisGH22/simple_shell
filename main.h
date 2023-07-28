@@ -19,8 +19,9 @@ char **split_string(char *str, char *delimiter);
 void *_calloc(unsigned int nmemb, unsigned int size);
 int _getline(char *line);
 void _env(void);
-int _unsetenv(const char *var_name);
-char *_strchr(char *s, char c);
+int _atoi(char *s);
+void _unsetenv(char **arv);
+void _setenv(char **arv);
 
 extern char **environ;
 
