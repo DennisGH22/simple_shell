@@ -5,8 +5,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <errno.h>
+
+#define PRINTER(c) (write(STDOUT_FILENO, c, _strlen(c)))
 
 int execute_command(char **args);
 int _strcmp(char *s1, char *s2);
@@ -20,6 +27,8 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 int _getline(char *line);
 void _env(void);
 int _atoi(char *s);
+char *_itoa(unsigned int n);
+void exit_shell(char **cmd, char *input, char **argv, int c);
 
 extern char **environ;
 
