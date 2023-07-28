@@ -8,26 +8,29 @@
  * or NULL if not found.
 */
 
-char *_getenv(char *env_var)
+
+char *_getenv(const char *env_var)
 {
-	int env_index = 0, char_index;
-	int match_status;
+    char **env_ptr;
+    char *current_env_var;
+    const char *target_var_ptr;
 
-	for (; environ[env_index]; env_index++)
-	{
-		match_status = 1;
+    if (env_var == NULL || *env_var == '\0')
+        return (NULL);
 
-		for (char_index = 0; environ[env_index][char_index] != '='; char_index++)
-		{
-			if (environ[env_index][char_index] != env_var[char_index])
-				match_status = 0;
-		}
+    for (env_ptr = environ; *env_ptr; env_ptr++)
+    {
+        current_env_var = *env_ptr;
+        target_var_ptr = env_var;
 
-		if (match_status == 1)
-			break;
-	}
+        for (; *current_env_var && *current_env_var == *target_var_ptr; current_env_var++, target_var_ptr++)
+            ;
 
-	return (&environ[env_index][char_index + 1]);
+        if (*current_env_var == '=' && *target_var_ptr == '\0')
+            return (current_env_var + 1);
+    }
+
+    return (NULL);
 }
 
 /**
@@ -36,11 +39,10 @@ char *_getenv(char *env_var)
 
 void _env(void)
 {
-	int i = 0;
+    char **env_ptr;
 
-	for (; environ[i]; i++)
-	{
-		printf("%s\n", environ[i]);
-	}
+    for (env_ptr = environ; *env_ptr; env_ptr++)
+    {
+        printf("%s\n", *env_ptr);
+    }
 }
-
