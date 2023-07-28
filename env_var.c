@@ -10,24 +10,24 @@
 
 char *_getenv(char *env_var)
 {
-    int env_index = 0, char_index;
-    int match_status;
+	int env_index = 0, char_index;
+	int match_status;
 
-    for (; environ[env_index]; env_index++)
-    {
-        match_status = 1;
+	for (; environ[env_index]; env_index++)
+	{
+		match_status = 1;
 
-        for (char_index = 0; environ[env_index][char_index] != '='; char_index++)
-        {
-            if (environ[env_index][char_index] != env_var[char_index])
-                match_status = 0;
-        }
+		for (char_index = 0; environ[env_index][char_index] != '='; char_index++)
+		{
+			if (environ[env_index][char_index] != env_var[char_index])
+				match_status = 0;
+		}
 
-        if (match_status == 1)
-            break;
-    }
+		if (match_status == 1)
+			break;
+	}
 
-    return (&environ[env_index][char_index + 1]);
+	return (&environ[env_index][char_index + 1]);
 }
 
 /**
@@ -36,11 +36,11 @@ char *_getenv(char *env_var)
 
 void _env(void)
 {
-    int i = 0;
+	int i = 0;
 
-    for (; environ[i]; i++)
-    {
-        printf("%s\n", environ[i]);
-    }
+	for (; environ[i]; i++)
+	{
+		printf("%s\n", environ[i]);
+	}
 }
 
