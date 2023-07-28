@@ -27,8 +27,6 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 int _getline(char *line);
 void _env(void);
 int _atoi(char *s);
-char *_itoa(unsigned int n);
-void exit_shell(char **cmd, char *input, char **argv, int c);
 
 extern char **environ;
 
