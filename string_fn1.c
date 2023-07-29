@@ -81,7 +81,7 @@ char *_strncpy(char *dest, char *src, int n)
  * Return: Negative value if s1 < s2, positive value if s1 > s2, 0 if equal.
 */
 
-int strncmp(const char *s1, const char *s2, size_t n)
+int _strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t i;
 
