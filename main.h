@@ -11,6 +11,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <linux/limits.h>
 
 int execute_command(char **args);
 int _strcmp(char *s1, char *s2);
@@ -24,6 +25,12 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 int _getline(char *line);
 void _env(void);
 int _atoi(char *s);
+int _isalpha(int c);
+char *_itoa(unsigned int n);
+int _isdigit(int c);
+int is_all_digits(const char *str);
+void reverse_array(int *a, int n);
+void exit_shell(char **cmd, char *input, char **argv, int c);
 
 extern char **environ;
 
