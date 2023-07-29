@@ -28,12 +28,6 @@ int main(void)
 
 		if (_strcmp("exit", buff) == 0)
 		{
-			exit_arg = split_string(buff, " ");
-            exit_arg = split_string(NULL, " ");
-
-            if (exit_arg != NULL) {
-                exit_status = _atoi(exit_arg);
-
             free(buff);
             break;
 		}
