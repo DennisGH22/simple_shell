@@ -46,7 +46,7 @@ int main(void)
 		else
 			perror("Error");
 		
-		exit_shell(args, buff, NULL, 0);
+		exit_shell(args, buff);
 
 		free(args);
 	}

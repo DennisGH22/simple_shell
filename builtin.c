@@ -16,7 +16,7 @@ void exit_shell(char **cmd, char *input, char **argv, int c) {
         exit(status);
     }
 
-    print_error(argv, c, cmd);
+    print_error(cmd);
     free(input);
     free(cmd);
     exit(EXIT_FAILURE);

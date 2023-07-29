@@ -30,7 +30,7 @@ char *_itoa(unsigned int n);
 int _isdigit(int c);
 int is_all_digits(const char *str);
 void exit_shell(char **cmd, char *input, char **argv, int c);
-void print_error(char **argv, int c, char **cmd);
+void print_error(char **cmd);
 
 extern char **environ;
 
