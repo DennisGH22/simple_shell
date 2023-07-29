@@ -27,7 +27,7 @@ int main(void)
 		}
 		buff[buff_size - 1] = '\0';
 
-		if (_strcmp("exit ", buff, 5) == 0)
+		if (_strncmp("exit ", buff, 5) == 0)
 		{
 			arg_len = buff_size - 5;
 			_strncpy(arg, buff + 5, arg_len);

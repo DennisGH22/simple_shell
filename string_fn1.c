@@ -71,3 +71,30 @@ char *_strncpy(char *dest, char *src, int n)
 
 	return (dest);
 }
+
+/**
+ * strncmp - Compare the first 'n' characters of two strings.
+ * @s1: Pointer to the first string to be compared.
+ * @s2: Pointer to the second string to be compared.
+ * @n: The maximum number of characters to compare.
+ *
+ * Return: Negative value if s1 < s2, positive value if s1 > s2, 0 if equal.
+*/
+
+int strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t i;
+
+    for (i = 0; i < n; i++)
+    {
+        if (*s1 != *s2)
+            return (*s1 - *s2);
+
+        if (*s1 == '\0')
+            return (0);
+
+        s1++;
+        s2++;
+    }
+    return (0);
+}
