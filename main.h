@@ -28,30 +28,6 @@ int _atoi(char *s);
 int _isalpha(int c);
 int _isdigit(int c);
 
-typedef int (*builtin_func)(char **cmd, int er);
-
-typedef struct {
-    const char *command;
-    builtin_func fun;
-} builtin_entry;
-
-int ch_dir(char **args, int err);
-/* int echo_env(char **args, int err);
-int echo_help(char **args, int err);
-int execute_echo(char **args, int err);
-int echo_history(char **args, int err); */
-
-builtin_entry builtins[] = {
-    {"cd", ch_dir},
-    /* {"env", echo_env},
-    {"help", echo_help},
-    {"echo", execute_echo},
-    {"history", echo_history}, */
-    {NULL, NULL}
-};
-
-int _builtins(char **args, int err);
-
 extern char **environ;
 
 #endif
