@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	char *buff = NULL, **args;
+	char *buff = NULL, *status_str = NULL, **args;
 	size_t read_size = 0;
 	ssize_t buff_size = 0;
 	int exit_status = 0;
@@ -37,6 +37,14 @@ int main(void)
 			exit_status = 0;
 			continue;
 		}
+
+		if (_strcmp("exit", buff) == 0)
+		{
+            status_str = buff + strlen("exit ");
+            exit_status = atoi(status_str);
+            free(buff);
+            break;
+        }
 
 		args = split_string(buff, " ");
 		args[0] = env_path(args[0]);
