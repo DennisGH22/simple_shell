@@ -19,7 +19,7 @@ int main(void)
 			write(STDOUT_FILENO, "$ ", 2);
 
 		buff_size = getline(&buff, &read_size, stdin);
-		if (buff_size == -1 || _strcmp("exit\n", buff) == 0)
+		if (buff_size == -1)
 		{
 			free(buff);
 			break;
