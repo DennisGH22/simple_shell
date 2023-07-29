@@ -19,15 +19,21 @@ int main(void)
 			write(STDOUT_FILENO, "$ ", 2);
 
 		buff_size = getline(&buff, &read_size, stdin);
-		if (buff_size == -1)
+		if (buff_size == -1 || _strcmp("exit\n", buff) == 0)
 		{
 			free(buff);
 			break;
 		}
 		buff[buff_size - 1] = '\0';
 
-		if (_strcmp("exit", buff) == 0)
+		if (_strcmp("exit ", buff) == 0)
 		{
+			exit_arg = split_string(buff, " ");
+            exit_arg = split_string(NULL, " ");
+
+            if (exit_arg != NULL) {
+                exit_status = _atoi(exit_arg);
+
             free(buff);
             break;
 		}
