@@ -8,11 +8,10 @@
 
 int main(void)
 {
-	char *buff = NULL, **args;
+	char *buff = NULL, *exit_arg = NULL, **args;
 	size_t read_size = 0;
 	ssize_t buff_size = 0;
-	int arg_len, exit_status = 0;
-	char arg[buff_size];
+	int exit_status = 0;
 
 	while (1)
 	{
@@ -27,16 +26,16 @@ int main(void)
 		}
 		buff[buff_size - 1] = '\0';
 
-		if (_strncmp("exit ", buff, 5) == 0)
+		if (_strcmp("exit", buff) == 0)
 		{
-			arg_len = buff_size - 5;
-			_strncpy(arg, buff + 5, arg_len);
-			arg[arg_len] = '\0';
+			exit_arg = split_string(buff, " ");
+            exit_arg = split_string(NULL, " ");
 
-			exit_status = _atoi(arg);
+            if (exit_arg != NULL) {
+                exit_status = _atoi(exit_arg);
 
-			free(buff);
-			break;
+            free(buff);
+            break;
 		}
 
 		if (_strcmp("env", buff) == 0)

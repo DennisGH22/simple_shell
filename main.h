@@ -29,7 +29,7 @@ int _atoi(char *s);
 int _isalpha(int c);
 int _isdigit(int c);
 char *_strncpy(char *dest, char *src, int n);
-int strncmp(const char *s1, const char *s2, size_t n);
+int _strncmp(char *s1, char *s2, int n);
 
 extern char **environ;
 
