@@ -45,8 +45,6 @@ int main(void)
 			exit_status = execute_command(args);
 		else
 			perror("Error");
-		
-		exit_shell(args, buff);
 
 		free(args);
 	}
