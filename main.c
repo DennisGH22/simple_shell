@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	char *buff = NULL, *exit_arg, **args;
+	char *buff = NULL, *exit_arg = NULL, **args;
 	size_t read_size = 0;
 	ssize_t buff_size = 0;
 	int exit_status = 0;
@@ -29,8 +29,9 @@ int main(void)
 		if (_strcmp("exit ", buff) == 0)
 		{
 			exit_arg = split_string(buff, " ");
+            exit_arg = split_string(NULL, " ");
 
-            if (exit_arg != NULL) {
+            if (exit_arg != NULL)
                 exit_status = _atoi(exit_arg);
 
             free(buff);
