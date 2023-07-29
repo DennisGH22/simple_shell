@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stddef.h>
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
@@ -28,7 +27,6 @@ void _env(void);
 int _atoi(char *s);
 int _isalpha(int c);
 int _isdigit(int c);
-char *_strncpy(char *dest, char *src, int n);
 
 extern char **environ;
 
