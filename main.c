@@ -38,7 +38,7 @@ int main(void)
 			continue;
 		}
 
-		if (_strcmp("exit", buff) == 0)
+		if (_strcmp("exit ", buff) == 0)
 		{
             status_str = buff + strlen("exit ");
             exit_status = _atoi(status_str);
