@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	char *buff = NULL, *exit_arg = NULL, **args;
+	char *buff = NULL, *status_str = NULL, **args;
 	size_t read_size = 0;
 	ssize_t buff_size = 0;
 	int exit_status = 0;
@@ -28,15 +28,11 @@ int main(void)
 
 		if (_strcmp("exit ", buff) == 0)
 		{
-			exit_arg = split_string(buff, " ");
-            exit_arg = split_string(NULL, " ");
-
-            if (exit_arg != NULL)
-                exit_status = _atoi(exit_arg);
-
+            status_str = buff + _strlen("exit ");
+            exit_status = _atoi(status_str);
             free(buff);
             break;
-		}
+        }
 
 		if (_strcmp("env", buff) == 0)
 		{
