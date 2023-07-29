@@ -26,9 +26,10 @@ int main(void)
 		}
 		buff[buff_size - 1] = '\0';
 
-		if (_strcmp("exit ", buff) == 0)
+		if (_strcmp("exit", buff) == 0)
 		{
-            status_str = buff + _strlen("exit ");
+            status_str = split_string(buff, " ");
+            status_str = split_string(NULL, " ");
             exit_status = _atoi(status_str);
             free(buff);
             break;
