@@ -31,7 +31,7 @@ int _builtins(char **args, int err)
  * Return: On success, returns 0. On failure, returns -1.
 */
 
-int ch_dir(char **cmd)
+int ch_dir(char **cmd, __attribute__((unused))int er)
 {
 	int success = -1;
 	char cwd[PATH_MAX];
