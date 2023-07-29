@@ -41,7 +41,7 @@ int main(void)
 		if (_strcmp("exit", buff) == 0)
 		{
             status_str = buff + strlen("exit ");
-            exit_status = atoi(status_str);
+            exit_status = _atoi(status_str);
             free(buff);
             break;
         }
