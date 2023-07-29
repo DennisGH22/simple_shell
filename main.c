@@ -8,10 +8,11 @@
 
 int main(void)
 {
-	ssize_t buff_size = 0;
-	char *buff = NULL, arg[buff_size], **args;
+	char *buff = NULL, **args;
 	size_t read_size = 0;
+	ssize_t buff_size = 0;
 	int arg_len, exit_status = 0;
+	char arg[buff_size];
 
 	while (1)
 	{
