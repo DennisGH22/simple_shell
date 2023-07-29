@@ -29,8 +29,8 @@ int _isalpha(int c);
 char *_itoa(unsigned int n);
 int _isdigit(int c);
 int is_all_digits(const char *str);
-void reverse_array(int *a, int n);
 void exit_shell(char **cmd, char *input, char **argv, int c);
+void print_error(char **argv, int c, char **cmd);
 
 extern char **environ;
 
