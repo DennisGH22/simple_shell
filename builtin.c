@@ -10,7 +10,7 @@
 
 int _changeDir(char **arguments, int argumentCount)
 {
-    char hyphen[] = "-";
+    char hyphen[] = "-", *hsh = "./hsh";
     char *homeEnvVar = "HOME";
     char *oldPwdEnvVar = "OLDPWD";
     char *pwdEnvVar = "PWD";
@@ -18,7 +18,7 @@ int _changeDir(char **arguments, int argumentCount)
     if (arguments == NULL || arguments[1] == NULL)
     {
         if (_getenv(homeEnvVar) == NULL)
-            printError(&arguments[0], argumentCount, arguments);
+            printError(&hsh, argumentCount, arguments);
         else
         {
             changeDirToHome();
@@ -40,7 +40,7 @@ int _changeDir(char **arguments, int argumentCount)
     else
     {
         if (access(arguments[1], F_OK) == -1)
-            printError(&arguments[0], argumentCount, arguments);
+            printError(&hsh, argumentCount, arguments);
         else
         {
             setenv(oldPwdEnvVar, _getenv(pwdEnvVar), 1);
