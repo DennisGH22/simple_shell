@@ -48,7 +48,7 @@ int _isBuiltin(char **arguments, char *buffer, int argumentCount);
 void printError(char **command, int count, char **argument);
 int intError(int num);
 
-int _changeDir(char **arguments, int count);
+int _changeDir(char **args, int count);
 /* void _help(char **arguments);
 void _echo(char **arguments); */
 
