@@ -7,17 +7,17 @@
  * @argument: The argument that caused the error.
 */
 
-void printError(const char *command, int count, const char *argument)
+void printError(char **command, int count, char **argument)
 {
-    const char *errorMessage = "not found\n";
-    size_t commandLen = _strlen(command);
-    size_t argumentLen = _strlen(argument);
+    char *errorMessage = "not found\n";
+    size_t commandLen = _strlen(*command);
+    size_t argumentLen = _strlen(*argument);
 
-    write(2, command, commandLen);
+    write(2, *command, commandLen);
     write(2, ": ", 2);
     dprintf(2, "%d", count);
     write(2, ": ", 2);
-    write(2, argument, argumentLen);
+    write(2, *argument, argumentLen);
     write(2, ": ", 2);
     write(2, errorMessage, _strlen(errorMessage));
 }
@@ -31,7 +31,7 @@ void printError(const char *command, int count, const char *argument)
 
 int intError(int num)
 {
-    int temp, printChars = 0;
+    int i, printChars = 0;
     unsigned int c1;
     char buffer[20];
 
@@ -43,7 +43,7 @@ int intError(int num)
     }
 
     c1 = num;
-    int i = sizeof(buffer) - 1;
+    i = sizeof(buffer) - 1;
     buffer[i] = '\0';
 
     do

@@ -11,7 +11,7 @@
  * -1 if any of the required pointers are NULL.
 */
 
-int _isBuiltin(const char **arguments, char *buffer, int argumentCount)
+int _isBuiltin(char **arguments, char *buffer, int argumentCount)
 {
 	if (arguments == NULL || *arguments == NULL || buffer == NULL)
 	{
@@ -29,10 +29,10 @@ int _isBuiltin(const char **arguments, char *buffer, int argumentCount)
 	}
 	else if (isCdCommand(arguments[0]))
 	{
-		_cd(arguments, argumentCount);
+		_changeDir(arguments, argumentCount);
 		return (0);
 	}
-	else if (isHelpCommand(arguments[0]))
+	/* else if (isHelpCommand(arguments[0]))
 	{
 		_help(arguments);
 		return (0);
@@ -41,7 +41,7 @@ int _isBuiltin(const char **arguments, char *buffer, int argumentCount)
 	{
 		_echo(arguments);
 		return (0);
-	}
+	} */
 
 	return (1);
 }
@@ -55,7 +55,7 @@ int _isBuiltin(const char **arguments, char *buffer, int argumentCount)
 
 void changeDirToHome(void)
 {
-    const char *homeDir = _getenv("HOME");
+    char *homeDir = _getenv("HOME");
     chdir(homeDir);
 }
 
@@ -68,7 +68,7 @@ void changeDirToHome(void)
 
 void changeDirToPrev(void)
 {
-    const char *oldPwdDir = _getenv("OLDPWD");
+    char *oldPwdDir = _getenv("OLDPWD");
     chdir(oldPwdDir);
 }
 
@@ -79,7 +79,7 @@ void changeDirToPrev(void)
  * This function changes the current working directory to the specified 'path'.
 */
 
-void changeDirToPath(const char *path)
+void changeDirToPath(char *path)
 {
     chdir(path);
 }

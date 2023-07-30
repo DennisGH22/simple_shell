@@ -7,7 +7,7 @@
  * Return: 1 if the command is "env", 0 otherwise.
 */
 
-int isEnvCommand(const char *command)
+int isEnvCommand(char *command)
 {
     return (_strcmp(command, "env") == 0 && _strlen(command) == ENV_COMMAND_LENGTH);
 }
@@ -19,7 +19,7 @@ int isEnvCommand(const char *command)
  * Return: 1 if the command is "exit", 0 otherwise.
 */
 
-int isExitCommand(const char *command)
+int isExitCommand(char *command)
 {
     return (_strcmp(command, "exit") == 0 && _strlen(command) == EXIT_COMMAND_LENGTH);
 }
@@ -31,7 +31,7 @@ int isExitCommand(const char *command)
  * Return: 1 if the command is "cd", 0 otherwise.
 */
 
-int isCdCommand(const char *command)
+int isCdCommand(char *command)
 {
     return (_strcmp(command, "cd") == 0 && _strlen(command) == CD_COMMAND_LENGTH);
 }
@@ -43,7 +43,7 @@ int isCdCommand(const char *command)
  * Return: 1 if the command is "help", 0 otherwise.
 */
 
-int isHelpCommand(const char *command)
+int isHelpCommand(char *command)
 {
     return (_strcmp(command, "help") == 0 && _strlen(command) == HELP_COMMAND_LENGTH);
 }
@@ -55,7 +55,7 @@ int isHelpCommand(const char *command)
  * Return: 1 if the command is "echo", 0 otherwise.
 */
 
-int isEchoCommand(const char *command)
+int isEchoCommand(char *command)
 {
     return (_strcmp(command, "echo") == 0 && _strlen(command) == ECHO_COMMAND_LENGTH);
 }

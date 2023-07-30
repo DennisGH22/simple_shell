@@ -11,14 +11,14 @@
 int _changeDir(char **arguments, int argumentCount)
 {
     char hyphen[] = "-";
-    const char *homeEnvVar = "HOME";
-    const char *oldPwdEnvVar = "OLDPWD";
-    const char *pwdEnvVar = "PWD";
+    char *homeEnvVar = "HOME";
+    char *oldPwdEnvVar = "OLDPWD";
+    char *pwdEnvVar = "PWD";
 
     if (arguments == NULL || arguments[1] == NULL)
     {
         if (_getenv(homeEnvVar) == NULL)
-            printError(arguments[0], argumentCount, arguments);
+            printError(&arguments[0], argumentCount, arguments);
         else
         {
             changeDirToHome();
@@ -34,13 +34,13 @@ int _changeDir(char **arguments, int argumentCount)
         {
             changeDirToPrev();
             write(1, _getenv(pwdEnvVar), _strlen(_getenv(pwdEnvVar)));
-            _printf("\n");
+            printf("\n");
         }
     }
     else
     {
         if (access(arguments[1], F_OK) == -1)
-            printError(arguments[0], argumentCount, arguments);
+            printError(&arguments[0], argumentCount, arguments);
         else
         {
             setenv(oldPwdEnvVar, _getenv(pwdEnvVar), 1);

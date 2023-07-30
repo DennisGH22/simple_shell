@@ -39,22 +39,22 @@ int _isdigit(int c);
 char *_strncpy(char *dest, char *src, int n);
 int _strncmp(char *s1, char *s2, int n);
 
-int isEnvCommand(const char *command);
-int isExitCommand(const char *command);
-int isCdCommand(const char *command);
-int isHelpCommand(const char *command);
-int isEchoCommand(const char *command);
-int _isBuiltin(const char **arguments, char *buffer, int argumentCount);
-void printError(const char *command, int count, const char *argument);
+int isEnvCommand(char *command);
+int isExitCommand(char *command);
+int isCdCommand(char *command);
+int isHelpCommand(char *command);
+int isEchoCommand(char *command);
+int _isBuiltin(char **arguments, char *buffer, int argumentCount);
+void printError(char **command, int count, char **argument);
 int intError(int num);
 
-void _changeDir(char **arguments, int count);
+int _changeDir(char **arguments, int count);
 /* void _help(char **arguments);
 void _echo(char **arguments); */
 
 void changeDirToHome(void);
 void changeDirToPrev(void);
-void changeDirToPath(const char *path);
+void changeDirToPath(char *path);
 
 extern char **environ;
 
