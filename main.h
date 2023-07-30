@@ -14,6 +14,14 @@
 #include <errno.h>
 #include <limits.h>
 
+#define ENV_COMMAND_LENGTH 3
+#define EXIT_COMMAND_LENGTH 4
+#define CD_COMMAND_LENGTH 2
+#define HELP_COMMAND_LENGTH 4
+#define ECHO_COMMAND_LENGTH 4
+
+#define BUFFER_SIZE 1024
+
 int execute_command(char **args);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
@@ -30,6 +38,23 @@ int _isalpha(int c);
 int _isdigit(int c);
 char *_strncpy(char *dest, char *src, int n);
 int _strncmp(char *s1, char *s2, int n);
+
+int isEnvCommand(const char *command);
+int isExitCommand(const char *command);
+int isCdCommand(const char *command);
+int isHelpCommand(const char *command);
+int isEchoCommand(const char *command);
+int _isBuiltin(const char **arguments, char *buffer, int argumentCount);
+void printError(const char *command, int count, const char *argument);
+int intError(int num);
+
+void _changeDir(char **arguments, int count);
+/* void _help(char **arguments);
+void _echo(char **arguments); */
+
+void changeDirToHome(void);
+void changeDirToPrev(void);
+void changeDirToPath(const char *path);
 
 extern char **environ;
 
